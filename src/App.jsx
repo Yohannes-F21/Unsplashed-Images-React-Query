@@ -1,8 +1,14 @@
-import { useGlobalContext } from "./context";
-const App = () => {
-  const { state } = useGlobalContext();
-  console.log(state);
+import Gallery from "./Gallery";
+import SearchForm from "./SearchForm";
+import ThemeToggle from "./ThemeToggle";
 
-  return <h1>Unsplash Images Starter</h1>;
+const App = () => {
+  return (
+    <main className="max-w-screen-xl mx-auto">
+      <ThemeToggle />
+      <SearchForm />
+      {/* <Gallery />  */}
+    </main>
+  );
 };
 export default App;
