@@ -7,7 +7,7 @@ const Gallery = () => {
   const { searchTerm } = useGlobalContext();
 
   const { isLoading, data, error, isError } = useQuery({
-    queryKey: ["unsplash-images"],
+    queryKey: ["unsplash-images", searchTerm],
     queryFn: () =>
       customFetch.get(
         `photos?client_id=HUdvVjUHEY1z73Vb5GZXWfluGsDfu7vJ1ihVe2QJLaY&query=${searchTerm}`
@@ -43,7 +43,7 @@ const Gallery = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 p-4 w-3/4 mx-auto">
         {results.map((image) => {
           return (
-            <div key={image.id} className="img">
+            <div key={image.id} className="img shadow-lg ">
               <img src={image?.urls?.regular} alt={image.alt_description} />
             </div>
           );
