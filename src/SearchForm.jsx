@@ -1,12 +1,15 @@
 import React from "react";
 import { useState } from "react";
+import { useGlobalContext } from "./context";
 
 const SearchForm = () => {
-  const [searchInput, setSearchInput] = useState("");
+  const { setSearchTerm } = useGlobalContext();
+  // const [searchInput, setSearchInput] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(searchInput);
-    setSearchInput("");
+    const searchValue = e.target.elements.search.value;
+    if (!searchValue) return;
+    setSearchTerm(searchValue);
     // const searchValue = e.target.elements.search.value; // we can use uncontrolled input for easy form handling
     // console.log(searchValue);
   };
@@ -19,7 +22,7 @@ const SearchForm = () => {
           placeholder="cat"
           name="search"
           className="form-input search-input "
-          onChange={(event) => setSearchInput(event.target.value)}
+          // onChange={(event) => setSearchInput(event.target.value)}
         />
         <button
           type="submit"

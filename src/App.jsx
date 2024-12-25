@@ -7,7 +7,7 @@ const App = () => {
   return (
     <>
       {/* <ToastContainer position="top-right" /> */}
-      <main className="max-w-screen-xl mx-auto">
+      <main className="max-w-screen-xl mx-auto my-4">
         <ThemeToggle />
         <SearchForm />
         <Gallery />

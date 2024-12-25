@@ -5,6 +5,7 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   // const state = "global state";
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("office");
 
   const toggleTheme = () => {
     const newTheme = !isDarkTheme;
@@ -13,7 +14,9 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ isDarkTheme, toggleTheme }}>
+    <AppContext.Provider
+      value={{ isDarkTheme, toggleTheme, searchTerm, setSearchTerm }}
+    >
       {children}
     </AppContext.Provider>
   );

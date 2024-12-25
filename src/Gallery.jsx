@@ -1,13 +1,20 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import customFetch from "./utils";
+import { useGlobalContext } from "./context";
 
 const Gallery = () => {
+  const { searchTerm } = useGlobalContext();
+
   const { isLoading, data, error, isError } = useQuery({
     queryKey: ["unsplash-images"],
-    queryFn: () => customFetch.get("/"),
+    queryFn: () =>
+      customFetch.get(
+        `photos?client_id=HUdvVjUHEY1z73Vb5GZXWfluGsDfu7vJ1ihVe2QJLaY&query=${searchTerm}`
+      ),
   });
   console.log(data);
+  const results = data?.data?.results;
 
   if (isLoading) {
     return (
@@ -23,13 +30,21 @@ const Gallery = () => {
       </div>
     );
   }
+
+  if (results.length < 1) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <h4>No results found !!!</h4>
+      </div>
+    );
+  }
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 p-4 w-3/4 mx-auto">
-        {data?.data?.results.map((image) => {
+        {results.map((image) => {
           return (
             <div key={image.id} className="img">
-              <img src={image.urls.raw} alt={image.alt_description} />
+              <img src={image?.urls?.regular} alt={image.alt_description} />
             </div>
           );
         })}
