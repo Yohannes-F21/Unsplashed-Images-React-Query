@@ -5,6 +5,7 @@ import { useGlobalContext } from "./context";
 
 const Gallery = () => {
   const { searchTerm } = useGlobalContext();
+  // console.log(import.meta.env.VITE_API_KEY);
 
   const { isLoading, data, error, isError } = useQuery({
     queryKey: ["unsplash-images", searchTerm],
@@ -31,7 +32,7 @@ const Gallery = () => {
     );
   }
 
-  if (results.length < 1) {
+  if (results?.length < 1) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <h4>No results found !!!</h4>
